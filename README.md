@@ -68,7 +68,7 @@ The instructions below were followed to create this app from scratch.
 
 ### Create a new Rails application
 
-```
+```bash
 rails new peeps-uuids -d postgresql --skip-javascript
 ```
 
