@@ -27,13 +27,48 @@ Start your server:
 rails server
 ```
 
+## Running this app with Docker
+
+Actually, by using docker-compose, no dependencies (including Postgres) need to be installed on your machine.
+
+After cloning the repo, uncomment these three lines in `config/database.yml`:
+
+```
+  host: <%= ENV['POSTGRES_PORT_5432_TCP_ADDR'] %> 
+  port: <%= ENV['POSTGRES_PORT_5432_TCP_PORT'] %>
+  username: postgres
+```
+
+Next, `cd` to the root directory and run the following:
+
+```
+docker-compose up --build
+```
+
+This will build and start the two Docker containers: one for Postgres and one for the Rails app. They are set to link ports.
+
+In a new Terminal window, run `docker ps` to determine which container is running the Rails app. Then run the following:
+
+```
+docker exec -it <CONTAINER ID> /bin/bash
+```
+
+This will open a bash session in that container where you will run this line:
+
+```
+rake db:create db:migrate
+```
+
+You are now all set to go, with the Rails app responding to requests at `localhost:3000`.
+
+
 ## Steps taken to create this app
 
 The instructions below were followed to create this app from scratch.
 
 ### Create a new Rails application
 
-```bash
+```
 rails new peeps-uuids -d postgresql --skip-javascript
 ```
 
