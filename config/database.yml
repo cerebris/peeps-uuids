@@ -21,6 +21,11 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+  # If using docker-compose to run the app, uncomment the next three lines:
+  # host: <%= ENV['POSTGRES_PORT_5432_TCP_ADDR'] %> 
+  # port: <%= ENV['POSTGRES_PORT_5432_TCP_PORT'] %>
+  # username: postgres
+
 development:
   <<: *default
   database: peeps-uuids_development
