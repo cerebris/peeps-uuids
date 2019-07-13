@@ -1,4 +1,4 @@
-FROM ruby:2.4.1
+FROM ruby:2.6.3
 # uses Debian jessie
 
 # Install apt based dependencies required to run Rails as 
@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
   nodejs
 
 # The base container already has RubyGems and Bundler installed, but not Rails
-RUN gem install rails -v 5.1.1
+RUN gem install rails -v 5.2.3
 
 # Copy the Gemfile and install the project's dependencies
 RUN mkdir -p home/gemfiles 
