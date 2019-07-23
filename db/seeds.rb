@@ -16,6 +16,8 @@ contacts = []
                              })
 end
 
+Contact.create(first_name: 'Bobby', last_name: 'Tables')
+
 contacts.each do |contact|
   contact.phone_numbers.create({
                                  name: 'cell',
