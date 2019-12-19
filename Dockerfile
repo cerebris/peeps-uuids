@@ -1,33 +1,37 @@
-FROM ruby:2.6.3
-# uses Debian jessie
+FROM ruby:2.6.5-slim
 
-# Install apt based dependencies required to run Rails as 
-# well as RubyGems. As the Ruby image itself is based on a 
-# Debian image, we use apt-get to install those.
-RUN apt-get update && apt-get install -y \ 
-  build-essential \ 
-  nodejs
+ARG RAILS_ROOT=/app
+ENV RAILS_ENV=production
 
-# The base container already has RubyGems and Bundler installed, but not Rails
-RUN gem install rails -v 5.2.3
+RUN apt-get update -qq && \
+    apt-get install -y build-essential libpq-dev && \
+    apt-get clean
 
-# Copy the Gemfile and install the project's dependencies
-RUN mkdir -p home/gemfiles 
-WORKDIR home/gemfiles
+# Enabling app reloading based off of https://stackoverflow.com/questions/37699573/rails-app-in-docker-container-doesnt-reload-in-development
+# Sets the path where the app is going to be installed
+ENV RAILS_ROOT /app
+ENV BUNDLE_APP_CONFIG="$RAILS_ROOT/.bundle"
+
+# This will be the de-facto directory where all the contents are going to be stored.
+WORKDIR $RAILS_ROOT
+
+RUN gem install bundler -v 2.0.2 --no-document && \
+    gem install foreman --no-document
+
+# Copy the Gemfile as well as the Gemfile.lock and install
+# the RubyGems. This is a separate step so the dependencies
+# will be cached unless changes to one of those two files
+# are made.
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler && bundle install --jobs 20 --retry 5
 
-# Configure the main working directory. This is the base 
-# directory used in any further RUN, COPY, and ENTRYPOINT 
-# commands.
-RUN mkdir -p /home/peeps-uuids
-WORKDIR /home/peeps-uuids
+RUN bundle config --global frozen 1 && \
+    bundle install --without development:test:assets --verbose --jobs 20 --retry 5 --path=vendor/bundle && \
+    # Remove unneeded files (cached *.gem, *.o, *.c)
+    rm -rf vendor/bundle/ruby/2.6.0/cache/*.gem && \
+    find vendor/bundle/ruby/2.6.0/gems/ -name "*.c" -delete && \
+    find vendor/bundle/ruby/2.6.0/gems/ -name "*.o" -delete && \
+    # Creates the rails and pids directories and all the parents (if they don't exist)
+    mkdir -p $RAILS_ROOT/tmp/pids
 
-# Expose port 3000 to the Docker host, so we can access it 
-# from the outside.
-EXPOSE 3000
-
-# The main command to run when the container starts. Also 
-# tell the Rails dev server to bind to all interfaces by 
-# default.
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+# Copy the main application.
+COPY . ./
