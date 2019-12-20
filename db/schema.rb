@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2017_04_22_202816) do
+ActiveRecord::Schema.define(version: 2019_12_20_192133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2017_04_22_202816) do
     t.string "twitter"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "nick_name"
   end
 
   create_table "phone_numbers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
