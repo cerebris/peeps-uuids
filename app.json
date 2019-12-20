@@ -1,4 +1,5 @@
 {
+  "stack": "container",
   "environments": {
     "production": {
       "addons":[
