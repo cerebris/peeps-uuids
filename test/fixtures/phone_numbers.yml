@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  contact_id: 
-  name: MyString
-  phone_number: MyString
+fred_tester_home:
+  contact: fred_tester
+  name: Home
+  phone_number: '603-555-1212'
 
-two:
-  contact_id: 
-  name: MyString
-  phone_number: MyString
+fred_tester_cell:
+  contact: fred_tester
+  name: Cell
+  phone_number: '585-555-1212'

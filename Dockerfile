@@ -1,16 +1,17 @@
 FROM ruby:2.6.5-slim
 
-ARG RAILS_ROOT=/app
-ENV RAILS_ENV=production
-
 RUN apt-get update -qq && \
     apt-get install -y build-essential libpq-dev && \
     apt-get clean
 
 # Enabling app reloading based off of https://stackoverflow.com/questions/37699573/rails-app-in-docker-container-doesnt-reload-in-development
 # Sets the path where the app is going to be installed
-ENV RAILS_ROOT /app
+ARG RAILS_ROOT=/app
+ENV RAILS_ENV=production
 ENV BUNDLE_APP_CONFIG="$RAILS_ROOT/.bundle"
+
+# https://www.postgresql.org/docs/current/libpq-connect.html
+ENV PG_GSSENCMODE=prefer
 
 # This will be the de-facto directory where all the contents are going to be stored.
 WORKDIR $RAILS_ROOT
