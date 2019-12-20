@@ -16,7 +16,7 @@ ENV PG_GSSENCMODE=prefer
 # This will be the de-facto directory where all the contents are going to be stored.
 WORKDIR $RAILS_ROOT
 
-RUN gem install bundler -v 2.0.2 --no-document && \
+RUN gem install bundler -v 2.1.2 --no-document && \
     gem install foreman --no-document
 
 # Copy the Gemfile as well as the Gemfile.lock and install
