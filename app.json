@@ -4,7 +4,16 @@
     "review": {
       "addons":[
         "heroku-postgres:in-dyno"
-      ]
+      ],
+      "scripts": {
+        "postdeploy": "bundle exec rake db:schema:load"
+      },
+      "env": {
+        "SECRET_KEY_BASE": {
+          "description": "A secret key for verifying the integrity of signed cookies.",
+          "generator": "secret"
+        }
+      }
     },
     "test": {
       "scripts": {
