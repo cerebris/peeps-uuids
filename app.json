@@ -1,7 +1,7 @@
 {
   "stack": "container",
   "environments": {
-    "production": {
+    "review": {
       "addons":[
         "heroku-postgres:in-dyno"
       ]
