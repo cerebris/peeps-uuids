@@ -1,0 +1,12 @@
+version: "3.3"
+
+services:
+  app:
+    ports:
+      - "3000:3000"
+    environment:
+      SECRET_KEY_BASE: c687506728a3d929589eecb10258ab0d2f3823de3f813bbe8886d36f3c534fb5a2b26739282acf442682af7d84453abe79e5e9739e812b7179320e9e8b9b5172
+
+  db:
+    ports:
+      - "5432:5432"

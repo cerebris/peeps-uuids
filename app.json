@@ -1,0 +1,18 @@
+{
+  "environments": {
+    "production": {
+      "addons":[
+        "heroku-postgres:in-dyno"
+      ]
+    },
+    "test": {
+      "scripts": {
+        "test-setup": "bundle install",
+        "test": "bundle exec rails test"
+      },
+      "addons":[
+        "heroku-postgres:in-dyno"
+      ]
+    }
+  }
+}

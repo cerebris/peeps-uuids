@@ -6,24 +6,26 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-contacts = []
-20000.times do
-  contacts << Contact.create({
-                               first_name: Faker::Name.first_name,
-                               last_name: Faker::Name.last_name,
-                               email: Faker::Internet.safe_email,
-                               twitter: "@#{Faker::Internet.user_name}"
-                             })
-end
-
-contacts.each do |contact|
-  contact.phone_numbers.create({
-                                 name: 'cell',
-                                 phone_number: Faker::PhoneNumber.cell_phone
+unless ENV["RAILS_ENV"] == 'test'
+  contacts = []
+  20000.times do
+    contacts << Contact.create({
+                                 first_name: Faker::Name.first_name,
+                                 last_name: Faker::Name.last_name,
+                                 email: Faker::Internet.safe_email,
+                                 twitter: "@#{Faker::Internet.user_name}"
                                })
+  end
 
-  contact.phone_numbers.create({
-                                 name: 'home',
-                                 phone_number: Faker::PhoneNumber.phone_number
-                               })
+  contacts.each do |contact|
+    contact.phone_numbers.create({
+                                   name: 'cell',
+                                   phone_number: Faker::PhoneNumber.cell_phone
+                                 })
+
+    contact.phone_numbers.create({
+                                   name: 'home',
+                                   phone_number: Faker::PhoneNumber.phone_number
+                                 })
+  end
 end

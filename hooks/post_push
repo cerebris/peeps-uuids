@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+echo "------ HOOK START - POST PUSH -------"
+printenv
+
+docker tag $IMAGE_NAME $DOCKER_REPO:$SOURCE_BRANCH-$SOURCE_COMMIT
+docker push $DOCKER_REPO:$SOURCE_BRANCH-$SOURCE_COMMIT
+
+echo "------ HOOK END - POST PUSH -------"
