@@ -1,10 +1,19 @@
 {
   "stack": "container",
   "environments": {
-    "production": {
+    "review": {
       "addons":[
-        "heroku-postgres:in-dyno"
-      ]
+        "heroku-postgresql:hobby-dev"
+      ],
+      "scripts": {
+        "postdeploy": "bundle exec rails db:schema:load"
+      },
+      "env": {
+        "SECRET_KEY_BASE": {
+          "description": "A secret key for verifying the integrity of signed cookies.",
+          "generator": "secret"
+        }
+      }
     },
     "test": {
       "scripts": {
@@ -12,7 +21,7 @@
         "test": "bundle exec rails test"
       },
       "addons":[
-        "heroku-postgres:in-dyno"
+        "heroku-postgresql::hobby-dev"
       ]
     }
   }

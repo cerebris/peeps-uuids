@@ -33,7 +33,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # gem 'jsonapi-resources', '~> 0.9'
-gem 'jsonapi-resources', '~>0.10.0.beta9'
+gem 'jsonapi-resources', '~>0.10.2'
 
 gem 'faker', group: [:development, :test]
 

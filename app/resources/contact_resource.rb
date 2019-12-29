@@ -1,7 +1,7 @@
 class ContactResource < JSONAPI::Resource
   caching
 
-  attributes :first_name, :last_name, :full_name, :email, :twitter
+  attributes :first_name, :last_name, :full_name, :nick_name, :email, :twitter
 
   has_many :phone_numbers
 

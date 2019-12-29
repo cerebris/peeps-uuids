@@ -211,7 +211,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   faker
   jbuilder (~> 2.7)
-  jsonapi-resources (~> 0.10.0.beta9)
+  jsonapi-resources (~> 0.10.2)
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)
