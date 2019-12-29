@@ -329,11 +329,13 @@ rails server
 ```
 
 Create a new contact
+
 ```bash
 curl -i -H "Accept: application/vnd.api+json" -H 'Content-Type:application/vnd.api+json' -X POST -d '{"data": {"type":"contacts", "attributes":{"first-name":"John", "last-name":"Doe", "email":"john.doe@example.com"}}}' http://localhost:3000/contacts
 ```
 
 You should get something like this back
+
 ```
 HTTP/1.1 201 Created
 X-Frame-Options: SAMEORIGIN
