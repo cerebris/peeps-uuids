@@ -1,6 +1,4 @@
-class PhoneNumberResource < JSONAPI::Resource
-  caching
-
+class PhoneNumberResource < BaseResource
   attributes :name, :phone_number
   has_one :contact
 

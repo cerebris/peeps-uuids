@@ -1,5 +1,5 @@
 JSONAPI.configure do |config|
-  config.resource_key_type = :uuid
+  # config.resource_key_type = :uuid
 
   config.resource_cache = Rails.cache
 
